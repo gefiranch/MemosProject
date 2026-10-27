@@ -46,6 +46,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.memosproject.ui.goals.GoalsScreen
+import com.example.memosproject.ui.goals.rememberGoalsViewModel
 
 @Composable
 fun MomeApp(viewModel: AuthViewModel) {
@@ -170,6 +172,7 @@ private val tabs = listOf(MainTab("Transactions"), MainTab("Goals"), MainTab("Bu
 private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
     var selectedTab by rememberSaveable { mutableIntStateOf(0) }
     var profileDialog by remember { mutableStateOf(false) }
+    val goalsViewModel = rememberGoalsViewModel()
 
     Scaffold(
         topBar = {
@@ -203,7 +206,11 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
         }
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
-            CenterContent(tabs[selectedTab].title, "Halaman fitur ini masih kosong dan siap dikembangkan.")
+            if (selectedTab == 1) {
+                GoalsScreen(goalsViewModel)
+            } else {
+                CenterContent(tabs[selectedTab].title, "Halaman fitur ini masih kosong dan siap dikembangkan.")
+            }
         }
     }
     if (profileDialog) {
