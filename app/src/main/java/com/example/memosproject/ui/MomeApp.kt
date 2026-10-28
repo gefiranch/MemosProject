@@ -46,6 +46,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.memosproject.ui.checkin.CheckinScreen
+import com.example.memosproject.ui.checkin.rememberCheckinViewModel
 import com.example.memosproject.ui.goals.GoalsScreen
 import com.example.memosproject.ui.goals.rememberGoalsViewModel
 
@@ -173,6 +175,7 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
     var selectedTab by rememberSaveable { mutableIntStateOf(0) }
     var profileDialog by remember { mutableStateOf(false) }
     val goalsViewModel = rememberGoalsViewModel()
+    val checkinViewModel = rememberCheckinViewModel()
 
     Scaffold(
         topBar = {
@@ -208,6 +211,8 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
             if (selectedTab == 1) {
                 GoalsScreen(goalsViewModel)
+            } else if (selectedTab == 3) {
+                CheckinScreen(checkinViewModel)
             } else {
                 CenterContent(tabs[selectedTab].title, "Halaman fitur ini masih kosong dan siap dikembangkan.")
             }

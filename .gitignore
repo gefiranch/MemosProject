@@ -8,3 +8,6 @@
 /captures/
 .externalNativeBuild/
 .cxx/
+.env
+.env.*
+!.env.example
