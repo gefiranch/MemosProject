@@ -52,6 +52,8 @@ import com.example.memosproject.ui.goals.GoalsScreen
 import com.example.memosproject.ui.goals.rememberGoalsViewModel
 import com.example.memosproject.ui.transaction.TransactionScreen
 import com.example.memosproject.ui.transaction.rememberTransactionViewModel
+import com.example.memosproject.ui.budget.BudgetScreen
+import com.example.memosproject.ui.budget.rememberBudgetViewModel
 
 @Composable
 fun MomeApp(viewModel: AuthViewModel) {
@@ -179,6 +181,7 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
     val goalsViewModel = rememberGoalsViewModel()
     val checkinViewModel = rememberCheckinViewModel()
     val transactionViewModel = rememberTransactionViewModel()
+    val budgetViewModel = rememberBudgetViewModel()
 
     Scaffold(
         topBar = {
@@ -216,6 +219,8 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
                 TransactionScreen(transactionViewModel)
             } else if (selectedTab == 1) {
                 GoalsScreen(goalsViewModel)
+            } else if (selectedTab == 2) {
+                BudgetScreen(budgetViewModel)
             } else if (selectedTab == 3) {
                 CheckinScreen(checkinViewModel)
             } else {
