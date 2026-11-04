@@ -351,13 +351,13 @@ private fun TransactionListContent(
                             Box(
                                 modifier = Modifier
                                     .size(24.dp)
-                                    .background(Color(0xFFE8F5E9), CircleShape),
+                                    .background(MaterialTheme.colorScheme.primaryContainer, CircleShape),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
                                     Icons.Default.ArrowDownward,
                                     contentDescription = null,
-                                    tint = Color(0xFF2E7D32),
+                                    tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(14.dp)
                                 )
                             }
@@ -373,7 +373,7 @@ private fun TransactionListContent(
                             formatTransactionMoney(totalIncome),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
-                            color = Color(0xFF2E7D32)
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
 
@@ -490,8 +490,8 @@ private fun TransactionItemCard(
     onClick: () -> Unit
 ) {
     val isIncome = transaction.isPemasukan
-    val iconColor = if (isIncome) Color(0xFF2E7D32) else MaterialTheme.colorScheme.error
-    val iconBgColor = if (isIncome) Color(0xFFE8F5E9) else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f)
+    val iconColor = if (isIncome) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
+    val iconBgColor = if (isIncome) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f)
     val amountPrefix = if (isIncome) "+ " else "- "
 
     Card(
@@ -563,7 +563,7 @@ private fun TransactionDetailContent(
     onDelete: () -> Unit
 ) {
     val isIncome = transaction.isPemasukan
-    val accentColor = if (isIncome) Color(0xFF2E7D32) else MaterialTheme.colorScheme.error
+    val accentColor = if (isIncome) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
 
     Column(
         modifier = Modifier
