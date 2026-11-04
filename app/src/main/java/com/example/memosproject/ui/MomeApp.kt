@@ -50,6 +50,8 @@ import com.example.memosproject.ui.checkin.CheckinScreen
 import com.example.memosproject.ui.checkin.rememberCheckinViewModel
 import com.example.memosproject.ui.goals.GoalsScreen
 import com.example.memosproject.ui.goals.rememberGoalsViewModel
+import com.example.memosproject.ui.transaction.TransactionScreen
+import com.example.memosproject.ui.transaction.rememberTransactionViewModel
 
 @Composable
 fun MomeApp(viewModel: AuthViewModel) {
@@ -176,6 +178,7 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
     var profileDialog by remember { mutableStateOf(false) }
     val goalsViewModel = rememberGoalsViewModel()
     val checkinViewModel = rememberCheckinViewModel()
+    val transactionViewModel = rememberTransactionViewModel()
 
     Scaffold(
         topBar = {
@@ -209,7 +212,9 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
         }
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize().padding(padding)) {
-            if (selectedTab == 1) {
+            if (selectedTab == 0) {
+                TransactionScreen(transactionViewModel)
+            } else if (selectedTab == 1) {
                 GoalsScreen(goalsViewModel)
             } else if (selectedTab == 3) {
                 CheckinScreen(checkinViewModel)
