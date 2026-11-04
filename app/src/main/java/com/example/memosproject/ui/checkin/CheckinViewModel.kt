@@ -41,6 +41,7 @@ class CheckinViewModel(private val repository: CheckinRepository, private val us
     fun save() {
         val s = state.value
         if (s.loading) return
+        if (s.status !in listOf("Sesuai Rencana", "Hampir Melebihi Anggaran", "Melebihi Anggaran")) { state.update { it.copy(error = "Pilih status pengeluaran terlebih dahulu.") }; return }
         if (s.reflection.isBlank() || s.plan.isBlank()) { state.update { it.copy(error = "Isi refleksi dan rencana untuk besok.") }; return }
         val item = (s.selected ?: Checkin(UUID.randomUUID().toString(), userId, LocalDate.now().toString(), s.status, "", ""))
             .copy(status = s.status, reflection = s.reflection.trim(), plan = s.plan.trim())
