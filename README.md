@@ -21,12 +21,14 @@ Aplikasi Android manajemen keuangan pribadi yang dibuat untuk proyek akhir Pemro
    ```
 
    Minta nilai Supabase kepada PM. Gunakan client publishable key, jangan service-role key. `local.properties` diabaikan Git; jangan commit password, token, atau file konfigurasi lokal.
-3. Koordinasikan dengan PM sebelum menjalankan migrasi SQL dalam `supabase/migrations` di proyek Supabase bersama. Migrasi Goals membutuhkan bucket dan policies seperti dijelaskan di `docs/financial-goals.md`. Migrasi Journal membuat tabel baru dan tidak boleh dijalankan jika tabel serupa sudah ada tanpa penyesuaian skema.
+3. Koordinasikan dengan PM sebelum menjalankan migrasi SQL dalam `supabase/migrations` di proyek Supabase bersama. Migrasi Goals membutuhkan bucket dan policies seperti dijelaskan di `docs/financial-goals.md`. Untuk database baru, jalankan migrasi Journal secara berurutan. Jika `daily_checkins` sudah ada, jangan jalankan migrasi `CREATE TABLE`; periksa skemanya terlebih dahulu. Migrasi tambahan `202611040001` disiapkan untuk skema bersama yang memiliki kolom wajib `content`, dan telah dijalankan secara manual pada database bersama. Pastikan riwayat migrasi sesuai sebelum memakai Supabase CLI; jangan jalankan ulang migrasi yang sudah diterapkan.
 4. Jalankan aplikasi, register akun pribadi, lalu login. Implementasi auth saat ini bergantung pada pengaturan Confirm email di Supabase dan belum menyediakan reset password.
 
 ## Journal dan streak
 
 Di tab Journal, buat maksimal satu check-in per tanggal lokal perangkat. Refleksi dan rencana wajib diisi. Riwayat menampilkan tanggal terbaru lebih dahulu. Streak aktif menghitung tanggal berurutan berakhir hari ini atau kemarin; longest streak adalah rangkaian terpanjang di riwayat. Penghapusan membuat streak dihitung ulang.
+
+Untuk kompatibilitas dengan tabel yang sudah ada, aplikasi menyimpan refleksi juga ke kolom `content`. Catatan lama yang hanya memiliki `content` ditampilkan sebagai refleksi; status dan rencananya perlu dilengkapi saat diedit.
 
 Status dipilih manual sementara. Integrasi otomatis dengan transaksi/budget belum tersedia karena kedua fitur dan skema datanya belum ada pada versi dasar. Setelah keduanya siap, sepakati bersama tim cara menggabungkan kategori, periode, total belanja, ambang hampir melampaui, serta perilaku saat data belum cukup atau terjadi perubahan; jangan menyimpulkan status otomatis tanpa data yang sesuai.
 
