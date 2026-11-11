@@ -54,6 +54,8 @@ import com.example.memosproject.ui.transaction.TransactionScreen
 import com.example.memosproject.ui.transaction.rememberTransactionViewModel
 import com.example.memosproject.ui.budget.BudgetScreen
 import com.example.memosproject.ui.budget.rememberBudgetViewModel
+import com.example.memosproject.ui.bills.BillScreen
+import com.example.memosproject.ui.bills.rememberBillViewModel
 
 @Composable
 fun MomeApp(viewModel: AuthViewModel) {
@@ -182,6 +184,7 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
     val checkinViewModel = rememberCheckinViewModel()
     val transactionViewModel = rememberTransactionViewModel()
     val budgetViewModel = rememberBudgetViewModel()
+    val billViewModel = rememberBillViewModel()
 
     Scaffold(
         topBar = {
@@ -224,7 +227,7 @@ private fun MainTabs(email: String, busy: Boolean, onLogout: () -> Unit) {
             } else if (selectedTab == 3) {
                 CheckinScreen(checkinViewModel)
             } else {
-                CenterContent(tabs[selectedTab].title, "Halaman fitur ini masih kosong dan siap dikembangkan.")
+                BillScreen(billViewModel)
             }
         }
     }
